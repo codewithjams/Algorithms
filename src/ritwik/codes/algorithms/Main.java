@@ -60,7 +60,7 @@ public class Main {
 	}
 
 	private int [] inputArrayElements ( int size ) {
-		int a [] = new int [ size ];
+		int [] a = new int [ size ];
 		printLineConsoleOutput ( "Enter the elements of Array :" );
 		for ( int i = 0; i < size; ++i ) {
 			a [ i ] = mScanner.nextInt ();
