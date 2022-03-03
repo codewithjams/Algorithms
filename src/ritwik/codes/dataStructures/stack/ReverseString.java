@@ -1,7 +1,9 @@
 package ritwik.codes.dataStructures.stack;
 
 class CharArrayStack {
-	private char [] a;
+
+	private final char [] a;
+
 	private int top;
 
 	CharArrayStack ( int length ) {
@@ -23,9 +25,11 @@ class CharArrayStack {
 	char top () { return isEmpty () ? '\n' : a [ top ]; }
 
 	private boolean isEmpty () { return top == -1; }
+
 }
 
 public class ReverseString {
+
 	public String reverse ( String text ) {
 		char[] textArray = text.toCharArray ();
 		int length = textArray.length;
@@ -43,4 +47,5 @@ public class ReverseString {
 
 		return new String ( textArray );
 	}
+
 }
