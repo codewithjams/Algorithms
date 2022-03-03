@@ -17,22 +17,16 @@ public class QuickSort implements Sort {
 		return array;
 	}
 
-	private void swapItems(int[] a, int from, int to) {
-		int temp = a[from];
-		a[from] = a[to];
-		a[to] = temp;
-	}
-
 	private int partition(int[] a, int start, int end) {
 		int pivot = a[end];
 		int pIndex = start;
 		for (int i = start; i < end; ++i) {
 			if (a[i] <= pivot) {
-				swapItems(a, i, pIndex);
+				SortUtilities.swapItems(a, i, pIndex);
 				pIndex = pIndex + 1;
 			}
 		}
-		swapItems(a, pIndex, end);
+		SortUtilities.swapItems(a, pIndex, end);
 		return pIndex;
 	}
 

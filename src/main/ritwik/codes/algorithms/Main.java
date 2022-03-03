@@ -63,7 +63,7 @@ public class Main {
 		main.doBinarySearch(array, size, elementToFind);
 	}
 
-	/*------------------------------------------------ Public Methods ------------------------------------------------*/
+	/*----------------------------------------------- Private Methods ------------------------------------------------*/
 
 	private void initialize() {
 		mScanner = new Scanner(System.in);

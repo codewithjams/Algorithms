@@ -24,15 +24,9 @@ public class InsertionSort implements Sort {
 		int hole = from;
 
 		while (hole > 0 && array[hole - 1] > value) {
-			swapItems(hole, hole - 1);
+			SortUtilities.swapItems(array, hole, hole - 1);
 			hole -= 1;
 		}
-	}
-
-	private void swapItems(int from, int to) {
-		int temp = array[from];
-		array[from] = array[to];
-		array[to] = temp;
 	}
 
 }

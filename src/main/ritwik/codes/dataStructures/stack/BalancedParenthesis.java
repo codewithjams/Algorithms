@@ -26,6 +26,7 @@ class Stack {
 	boolean isEmpty() {
 		return top == -1;
 	}
+
 }
 
 public class BalancedParenthesis {
