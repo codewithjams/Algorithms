@@ -2,16 +2,24 @@ package ritwik.codes.algorithms;
 
 import ritwik.codes.algorithms.search.BinarySearch;
 
+import ritwik.codes.algorithms.search.Search;
+
 import ritwik.codes.algorithms.sort.*;
 
 import java.util.Scanner;
 
 public class Main {
 
+	/*-------------------------------------------------- Components --------------------------------------------------*/
+
 	private Scanner mScanner;
+
+	/*------------------------------------------------- Constructors -------------------------------------------------*/
 
 	private Main() {
 	}
+
+	/*------------------------------------------------ Static Methods ------------------------------------------------*/
 
 	public static void main(String[] args) {
 
@@ -20,26 +28,13 @@ public class Main {
 
 		switch (main.inputChoice()) {
 
-			case 1: {
-				int size = main.inputArraySize();
-				int[] array = main.inputArrayElements(size);
+			case 1:
+				handleSortSelection(main);
+				break;
 
-				main.doSelectionSort(array, size);
-				main.doBubbleSort(array, size);
-				main.doInsertionSort(array, size);
-				main.doMergeSort(array, size);
-				main.doQuickSort(array, size);
-			}
-			break;
-
-			case 2: {
-				int size = main.inputArraySize();
-				int[] array = main.inputArrayElements(size);
-				int elementToFind = main.inputElementToFind();
-
-				main.doBinarySearch(array, size, elementToFind);
-			}
-			break;
+			case 2:
+				handleSearchSelection(main);
+				break;
 
 			default: {
 				main.printLineConsoleOutput("Wrong Choice Entered");
@@ -48,6 +43,27 @@ public class Main {
 		}
 
 	}
+
+	private static void handleSortSelection(Main main) {
+		int size = main.inputArraySize();
+		int[] array = main.inputArrayElements(size);
+
+		main.doSelectionSort(array, size);
+		main.doBubbleSort(array, size);
+		main.doInsertionSort(array, size);
+		main.doMergeSort(array, size);
+		main.doQuickSort(array, size);
+	}
+
+	private static void handleSearchSelection(Main main) {
+		int size = main.inputArraySize();
+		int[] array = main.inputArrayElements(size);
+		int elementToFind = main.inputElementToFind();
+
+		main.doBinarySearch(array, size, elementToFind);
+	}
+
+	/*------------------------------------------------ Public Methods ------------------------------------------------*/
 
 	private void initialize() {
 		mScanner = new Scanner(System.in);
@@ -78,58 +94,39 @@ public class Main {
 	}
 
 	private void doSelectionSort(int[] a, int n) {
-		int[] sortedArray = a;
-		SelectionSort selectionSort = new SelectionSort(sortedArray, n);
-		sortedArray = selectionSort.sort();
-		printLineConsoleOutput("Sorted array with Selection Sort is");
-		for (int i = 0; i < n; ++i) {
-			printConsoleOutput(sortedArray[i] + " ");
-		}
+		performSortAndShow(new SelectionSort(a, n));
 	}
 
 	private void doBubbleSort(int[] a, int n) {
-		int[] sortedArray = a;
-		BubbleSort bubbleSort = new BubbleSort(sortedArray, n);
-		sortedArray = bubbleSort.sort();
-		printLineConsoleOutput("\nSorted array with Bubble Sort is");
-		for (int i = 0; i < n; ++i) {
-			printConsoleOutput(sortedArray[i] + " ");
-		}
+		performSortAndShow(new BubbleSort(a, n));
 	}
 
 	private void doInsertionSort(int[] a, int n) {
-		int[] sortedArray = a;
-		InsertionSort insertionSort = new InsertionSort(sortedArray, n);
-		sortedArray = insertionSort.sort();
-		printLineConsoleOutput("\nSorted array with Insertion Sort is");
-		for (int i = 0; i < n; ++i) {
-			printConsoleOutput(sortedArray[i] + " ");
-		}
+		performSortAndShow(new InsertionSort(a, n));
 	}
 
 	private void doMergeSort(int[] a, int n) {
-		int[] sortedArray = a;
-		MergeSort mergeSort = new MergeSort(sortedArray, n);
-		sortedArray = mergeSort.sort();
-		printLineConsoleOutput("\nSorted array with Merge Sort is");
-		for (int i = 0; i < n; ++i) {
-			printConsoleOutput(sortedArray[i] + " ");
-		}
+		performSortAndShow(new MergeSort(a, n));
 	}
 
 	private void doQuickSort(int[] a, int n) {
-		int[] sortedArray = a;
-		QuickSort quickSort = new QuickSort(sortedArray, n);
-		sortedArray = quickSort.sort();
-		printLineConsoleOutput("\nSorted array with Quick Sort is");
-		for (int i = 0; i < n; ++i) {
-			printConsoleOutput(sortedArray[i] + " ");
+		performSortAndShow(new QuickSort(a, n));
+	}
+
+	private void performSortAndShow(Sort sort) {
+		int[] sortedArray = sort.sort();
+		printLineConsoleOutput("\nSorted array is:");
+		for (int j : sortedArray) {
+			printConsoleOutput(j + " ");
 		}
 	}
 
 	private void doBinarySearch(int[] a, int n, int x) {
-		BinarySearch search = new BinarySearch(a, n);
-		int resultIndex = search.search(x);
+		performSearch(new BinarySearch(a, n), x);
+	}
+
+	private void performSearch(Search search, int searchCandidate) {
+		int resultIndex = search.search(searchCandidate);
 		printLineConsoleOutput(resultIndex == -1 ? "Item not found" : "Item found at Position " + (resultIndex + 1));
 	}
 
