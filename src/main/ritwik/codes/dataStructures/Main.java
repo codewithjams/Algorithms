@@ -1,6 +1,6 @@
 package ritwik.codes.dataStructures;
 
-import ritwik.codes.dataStructures.linkedList.LinkedList;
+import ritwik.codes.dataStructures.list.linkedList.LinkedList;
 
 import ritwik.codes.dataStructures.queues.ArrayQueue;
 import ritwik.codes.dataStructures.queues.LinkedListQueue;

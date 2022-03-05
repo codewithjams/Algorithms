@@ -1,8 +1,10 @@
 /* Code Source : https://www.sanfoundry.com/java-program-implement-singly-linked-list/ */
 
-package ritwik.codes.dataStructures.linkedList;
+package ritwik.codes.dataStructures.list.linkedList;
 
-public class LinkedList<T> {
+import ritwik.codes.dataStructures.list.List;
+
+public class LinkedList<T> implements List<T> {
 
 	/*-------------------------------------------------- Components --------------------------------------------------*/
 
@@ -41,6 +43,109 @@ public class LinkedList<T> {
 			}
 		}
 		return builder.toString();
+	}
+
+	/*------------------------------------------------ List Callbacks ------------------------------------------------*/
+
+	/**
+	 * Checks whether List is empty or not.
+	 *
+	 * @return {@code true} if the List is empty, else {@code false}
+	 */
+	@Override
+	public boolean isEmpty() {
+		return this.start == null;
+	}
+
+	/**
+	 * Gives size of the List.
+	 *
+	 * @return 0 if List is empty, else, size of List.
+	 */
+	@Override
+	public int getSize() {
+		return this.size;
+	}
+
+	/**
+	 * Inserts the {@code data} in Last Index of List.
+	 *
+	 * @param data Integer to be added in the list.
+	 */
+	@Override
+	public void insert(T data) {
+		if (this.size == 0) {
+			insertAtStart(data);
+		} else {
+			insertAtPosition(data, this.size);
+		}
+	}
+
+	/**
+	 * Inserts the data in the List.
+	 *
+	 * @param data     Value of Data to be stored in the List.
+	 * @param position Positive Integer starting from 1 or size of List.
+	 */
+	@Override
+	public void insert(T data, int position) {
+		if (position < 0 || position > size) return;
+		if (position == 0) {
+			insertAtStart(data);
+		} else if (position == size - 1) {
+			insertAtEnd(data);
+		} else {
+			insertAtPosition(data, position);
+		}
+	}
+
+	/**
+	 * Deletes the last node in the List until the List is empty.
+	 */
+	@Override
+	public void delete() {
+		if (this.size == 0) return;
+		deleteAtEnd();
+	}
+
+	/**
+	 * Deletes the Item at provided position.
+	 *
+	 * @param position Positive Integer starting from 1 or size of List
+	 */
+	@Override
+	public void delete(int position) {
+		position -= 1;
+		if (position < -1 || position > size) return;
+		if (position == 0) {
+			deleteAtStart();
+		} else if (position == this.size - 1) {
+			deleteAtEnd();
+		} else {
+			deleteAtPosition(position - 1);
+		}
+	}
+
+	@Override
+	public T get(int position) {
+		// Buggy
+		Node<T> pointer = start;
+		if (position == 1) {
+			return pointer.getData();
+		}
+		do {
+			pointer = pointer.getLink();
+			position -= 1;
+		} while (position > 0);
+
+		if (pointer == null) return null;
+		else return pointer.getData();
+	}
+
+	@Override
+	public void reverse() {
+		// reverseUsingLoop (); // Iterative Approach
+		reverseUsingRecursion(start); // Recursive Approach
 	}
 
 	/*------------------------------------------------ Private Methods -----------------------------------------------*/
@@ -144,101 +249,6 @@ public class LinkedList<T> {
 		Node<T> q = p.getLink();
 		q.setLink(p);
 		p.setLink(null);
-	}
-
-	/*------------------------------------------------ Public Methods ------------------------------------------------*/
-
-	/**
-	 * Checks whether List is empty or not.
-	 *
-	 * @return {@code true} if the List is empty, else {@code false}
-	 */
-	public boolean isEmpty() {
-		return this.start == null;
-	}
-
-	/**
-	 * Gives size of the List.
-	 *
-	 * @return 0 if List is empty, else, size of List.
-	 */
-	public int getSize() {
-		return this.size;
-	}
-
-	/**
-	 * Inserts the {@code data} in Last Index of List.
-	 *
-	 * @param data Integer to be added in the list.
-	 */
-	public void insert(T data) {
-		if (this.size == 0) {
-			insertAtStart(data);
-		} else {
-			insertAtPosition(data, this.size);
-		}
-	}
-
-	/**
-	 * Inserts the data in the List.
-	 *
-	 * @param data     Value of Data to be stored in the List.
-	 * @param position Positive Integer starting from 1 or size of List.
-	 */
-	public void insert(T data, int position) {
-		if (position < 0 || position > size) return;
-		if (position == 0) {
-			insertAtStart(data);
-		} else if (position == size - 1) {
-			insertAtEnd(data);
-		} else {
-			insertAtPosition(data, position);
-		}
-	}
-
-	/**
-	 * Deletes the last node in the List until the List is empty.
-	 */
-	public void delete() {
-		if (this.size == 0) return;
-		deleteAtEnd();
-	}
-
-	/**
-	 * Deletes the Item at provided position.
-	 *
-	 * @param position Positive Integer starting from 1 or size of List
-	 */
-	public void delete(int position) {
-		position -= 1;
-		if (position < -1 || position > size) return;
-		if (position == 0) {
-			deleteAtStart();
-		} else if (position == this.size - 1) {
-			deleteAtEnd();
-		} else {
-			deleteAtPosition(position - 1);
-		}
-	}
-
-	public T get(int position) {
-		// Buggy
-		Node<T> pointer = start;
-		if (position == 1) {
-			return pointer.getData();
-		}
-		do {
-			pointer = pointer.getLink();
-			position -= 1;
-		} while (position > 0);
-
-		if (pointer == null) return null;
-		else return pointer.getData();
-	}
-
-	public void reverse() {
-		// reverseUsingLoop (); // Iterative Approach
-		reverseUsingRecursion(start); // Recursive Approach
 	}
 
 }

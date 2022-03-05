@@ -1,4 +1,4 @@
-package ritwik.codes.dataStructures.linkedList;
+package ritwik.codes.dataStructures.list.linkedList;
 
 class Node<T> {
 
