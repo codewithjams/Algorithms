@@ -59,7 +59,7 @@ public class Main {
 	}
 
 	private void useLinkedList() {
-		LinkedList list = new LinkedList();
+		LinkedList<Integer> list = new LinkedList<>();
 		printLineConsoleOutput("Is the List empty : " + list.isEmpty());
 
 		printConsoleOutput("---------- ADD ITEMS ONE BY ONE ----------\n");

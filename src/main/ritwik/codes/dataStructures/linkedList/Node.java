@@ -1,33 +1,38 @@
 package ritwik.codes.dataStructures.linkedList;
 
-class Node {
+class Node<T> {
 
-	private int data;
-	private Node link;
+	/*-------------------------------------------------- Components --------------------------------------------------*/
 
-	Node() {
-		this.data = 0;
+	private T data;
+	private Node<T> link;
+
+	/*------------------------------------------------- Constructors -------------------------------------------------*/
+
+	public Node() {
 		this.link = null;
 	}
 
-	Node(int data, Node link) {
+	public Node(T data, Node<T> link) {
 		this.data = data;
 		this.link = link;
 	}
 
-	int getData() {
+	/*-------------------------------------------------- Accessors ---------------------------------------------------*/
+
+	public T getData() {
 		return data;
 	}
 
-	void setData(int data) {
+	public void setData(T data) {
 		this.data = data;
 	}
 
-	Node getLink() {
+	public Node<T> getLink() {
 		return link;
 	}
 
-	void setLink(Node link) {
+	public void setLink(Node<T> link) {
 		this.link = link;
 	}
 

@@ -2,10 +2,12 @@
 
 package ritwik.codes.dataStructures.linkedList;
 
-public class LinkedList {
+public class LinkedList<T> {
 
-	private Node start;
-	private Node end;
+	/*-------------------------------------------------- Components --------------------------------------------------*/
+
+	private Node<T> start;
+	private Node<T> end;
 
 	private int size;
 
@@ -17,7 +19,7 @@ public class LinkedList {
 		this.size = 0;
 	}
 
-	/*-------------------------------------------- {@link Object} Methods --------------------------------------------*/
+	/*----------------------------------------------- Object Callbacks -----------------------------------------------*/
 
 	@Override
 	public String toString() {
@@ -28,7 +30,7 @@ public class LinkedList {
 			if (this.start.getLink() == null) {
 				builder.append(this.start.getData()).append(", ");
 			} else {
-				Node pointer = this.start;
+				Node<T> pointer = this.start;
 				builder.append(pointer.getData()).append(", ");
 				pointer = this.start.getLink();
 				while (pointer.getLink() != null) {
@@ -41,10 +43,10 @@ public class LinkedList {
 		return builder.toString();
 	}
 
-	/*------------------------------------------- {@code private} Methods --------------------------------------------*/
+	/*------------------------------------------------ Private Methods -----------------------------------------------*/
 
-	private void insertAtStart(int data) {
-		Node nPtr = new Node(data, null);
+	private void insertAtStart(T data) {
+		Node<T> nPtr = new Node<>(data, null);
 		this.size++;
 		if (isEmpty()) {
 			this.start = nPtr;
@@ -55,8 +57,8 @@ public class LinkedList {
 		}
 	}
 
-	private void insertAtEnd(int data) {
-		Node nPtr = new Node(data, null);
+	private void insertAtEnd(T data) {
+		Node<T> nPtr = new Node<>(data, null);
 		this.size++;
 		if (isEmpty()) {
 			this.start = nPtr;
@@ -67,13 +69,13 @@ public class LinkedList {
 		}
 	}
 
-	private void insertAtPosition(int data, int position) {
-		Node nPtr = new Node(data, null);
-		Node pointer = this.start;
+	private void insertAtPosition(T data, int position) {
+		Node<T> nPtr = new Node<>(data, null);
+		Node<T> pointer = this.start;
 		position -= 1;
 		for (int i = 0; i < this.size; ++i) {
 			if (position == i) {
-				Node temp = pointer.getLink();
+				Node<T> temp = pointer.getLink();
 				pointer.setLink(nPtr);
 				nPtr.setLink(temp);
 				break;
@@ -89,8 +91,8 @@ public class LinkedList {
 	}
 
 	private void deleteAtEnd() {
-		Node s = this.start;
-		Node t = this.start;
+		Node<T> s = this.start;
+		Node<T> t = this.start;
 		while (s != end) {
 			t = s;
 			s = s.getLink();
@@ -101,10 +103,10 @@ public class LinkedList {
 	}
 
 	private void deleteAtPosition(int position) {
-		Node pointer = this.start;
+		Node<T> pointer = this.start;
 		for (int i = 0; i < this.size; ++i) {
 			if (position == i) {
-				Node temp = pointer.getLink();
+				Node<T> temp = pointer.getLink();
 				temp = temp.getLink();
 				pointer.setLink(temp);
 				break;
@@ -116,9 +118,11 @@ public class LinkedList {
 
 	@SuppressWarnings("unused")
 	private void reverseUsingLoop() {
-		Node current = this.start;
-		Node previous = null;
-		Node next;
+
+		Node<T> current = this.start;
+		Node<T> previous = null;
+		Node<T> next;
+
 		while (current != null) {
 			next = current.getLink();
 			current.setLink(previous);
@@ -129,7 +133,7 @@ public class LinkedList {
 	}
 
 	@SuppressWarnings("unused")
-	private void reverseUsingRecursion(Node p) {
+	private void reverseUsingRecursion(Node<T> p) {
 		if (p.getLink() == null) {
 			start = p;
 			return;
@@ -137,12 +141,12 @@ public class LinkedList {
 
 		reverseUsingRecursion(p.getLink());
 
-		Node q = p.getLink();
+		Node<T> q = p.getLink();
 		q.setLink(p);
 		p.setLink(null);
 	}
 
-	/*-------------------------------------------- {@code public} Methods --------------------------------------------*/
+	/*------------------------------------------------ Public Methods ------------------------------------------------*/
 
 	/**
 	 * Checks whether List is empty or not.
@@ -167,7 +171,7 @@ public class LinkedList {
 	 *
 	 * @param data Integer to be added in the list.
 	 */
-	public void insert(int data) {
+	public void insert(T data) {
 		if (this.size == 0) {
 			insertAtStart(data);
 		} else {
@@ -181,7 +185,7 @@ public class LinkedList {
 	 * @param data     Value of Data to be stored in the List.
 	 * @param position Positive Integer starting from 1 or size of List.
 	 */
-	public void insert(int data, int position) {
+	public void insert(T data, int position) {
 		if (position < 0 || position > size) return;
 		if (position == 0) {
 			insertAtStart(data);
@@ -217,9 +221,9 @@ public class LinkedList {
 		}
 	}
 
-	public int get(int position) {
+	public T get(int position) {
 		// Buggy
-		Node pointer = start;
+		Node<T> pointer = start;
 		if (position == 1) {
 			return pointer.getData();
 		}
@@ -228,7 +232,7 @@ public class LinkedList {
 			position -= 1;
 		} while (position > 0);
 
-		if (pointer == null) return -1;
+		if (pointer == null) return null;
 		else return pointer.getData();
 	}
 
